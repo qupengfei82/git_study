@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="dist/css/bootstrap.min.css" />
+		<!--引入vue.js -->
+		<script type="text/javascript" src="js/vue.js"></script>
+		
+	 </head>
+	<body>
+		<!--2.定义div，vm控制的区域 -->
+		<div id="app" class="container">
+			<h1>{{msg}}</h1>
+		    <h1>{{msg|upper}}</h1>
+		    <h1>{{msg|concat(' China')}}</h1>
+		    <!--过滤器又先后顺序的-->
+		    <h1>{{msg|concat(' China')|upper}}</h1>
+		    <h1>{{msg|upper|concat(' China')}}</h1>
+		    
+		    <hr />
+		    <h1>{{info}}</h1>
+		    <h1>{{info|lower}}</h1>
+		</div>
+		
+		
+		
+
+		<script>
+			//全局过滤器，跨Vue实例使用
+			//无参的过滤器
+			Vue.filter("upper",function(value){
+				//value为第一个参数，管道符前面的变量的值，必须
+				//可以有多个参数，后面的参数为过滤器的参数
+				return value.toUpperCase();				
+			});
+			
+			//带有参数的过滤器,可以有多个参数，继续逗号隔开
+			Vue.filter("concat",function(value,arg1){
+				return value.concat(arg1);
+			});
+		 
+			//3.创建Vue的实例
+			var vm=new Vue({
+				el:"#app",
+				data:{//数据
+					msg:"hello",	
+					info:"HELLO WORLD"
+				},
+				filters:{ //局部过滤器
+					lower:function(value){
+						return value.toLowerCase();
+					},
+					//局部过滤器与全局过滤器同名时，局部过滤器优先
+					concat(value,arg){
+						//concat（），js中String的方法
+						return value.concat(arg).concat(",这是私有的");
+					}
+				}
+			 
+			});
+			
+			
+		</script>
+   </body>
+</html>

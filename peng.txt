@@ -1,4 +1,10 @@
 wo
+<<<<<<< HEAD
 a
 peng
 zuiniubi
+=======
+shi
+kaipeng
+die
+>>>>>>> e237073e773f2947eddec7867f9888a8309bf632
